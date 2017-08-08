@@ -7,6 +7,8 @@
 #include "mymfc9Doc.h"
 #include "mymfc9View.h"
 #include "DieViewer.h"
+#include "BitmapPicture.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -101,6 +103,11 @@ void CMymfc9View::OnLButtonDown(UINT nFlags, CPoint point)
     if (m_pDieViewerDlg->GetSafeHwnd() == 0)
     {
         m_pDieViewerDlg->Create(); // displays the dialog window
+		
+		// Load the bitmap from file
+		CBitmapPicture bmpPicture;
+		//bmpPicture.Load("C:/Users/Will/Pictures/test.jpg");
+		//m_pDieViewerDlg->m_DiePic.SetBitmap(bmpPicture);
     }
 
 	CView::OnLButtonDown(nFlags, point);
