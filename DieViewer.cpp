@@ -99,7 +99,36 @@ void CDieViewer::OnBtnlaunch()
 
 	// Load the bitmap from file
 	CBitmapPicture bmpPicture;
-	bmpPicture.Load("C:/Users/Will/Pictures/test.jpg");
+	bmpPicture.Load("C:/Users/Will/Pictures/LFFEFFM01S01_1_1-fail.jpg");
 
-	m_DiePic.SetBitmap(bmpPicture);
+	//CBitmap bmpPicture;
+	//HANDLE hBitMap = ::LoadImage(0, "C:/Users/Will/Pictures/materialdesign.bmp",IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
+	//bmpPicture.Attach((HBITMAP)hBitMap);
+
+	// Get dialog CRect
+	CRect* rect = new CRect();
+	this->GetClientRect(rect);
+
+	CDC *pDC = m_DiePic.GetDC();
+	CDC m_DC;
+
+	m_DC.CreateCompatibleDC(pDC);
+	m_DC.SelectObject(&bmpPicture);
+
+	// For getting bitmap width and height
+	BITMAP bm;
+	bmpPicture.GetBitmap(&bm);
+
+	double screenToImgRatio = (double)rect->Height() / (double)bm.bmHeight;
+
+	double resizedWidth = bm.bmWidth * screenToImgRatio;
+	double resizedheight = bm.bmHeight * screenToImgRatio;
+
+	double centerImgPos = (rect->Width() - resizedWidth) / 2;
+
+	SetStretchBltMode(*pDC, HALFTONE); // Prevents distortion
+	pDC->StretchBlt((int)centerImgPos, 0, (int)resizedWidth, (int)resizedheight, &m_DC, 0,0, bm.bmWidth, bm.bmHeight, SRCCOPY);
+
+	
+	
 }
