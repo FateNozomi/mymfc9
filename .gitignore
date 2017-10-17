@@ -1,0 +1,14 @@
+# Visual C++ cache files
+*.aps
+*.clw
+*.ncb
+
+# Visual C++ build log
+*.plg
+
+# Visual C++ workspace options file
+*.opt
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
